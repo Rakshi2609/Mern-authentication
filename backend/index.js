@@ -20,10 +20,6 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// Test routes
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
 
 app.get('/test-cookie', (req, res) => {
   console.log('Cookies:', req.cookies);
