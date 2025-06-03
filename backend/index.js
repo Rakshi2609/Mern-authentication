@@ -20,7 +20,7 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// Routes
+// Test routes
 app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
@@ -34,12 +34,18 @@ app.use('/api/auth', authRoutes);
 
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
-  const distPath = path.join(__dirname, '../frontend/dist');
+  const distPath = path.join(__dirname, 'frontend/dist');
+  console.log('🌐 Running in production mode');
+  console.log('📁 Serving static files from:', distPath);
+
   app.use(express.static(distPath));
-  
+
   app.get('*', (req, res) => {
+    console.log('💡 Catch-all route hit, serving index.html');
     res.sendFile(path.join(distPath, 'index.html'));
   });
+} else {
+  console.log('⚠️ Not in production mode. NODE_ENV =', process.env.NODE_ENV);
 }
 
 // Start server
