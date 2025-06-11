@@ -6,6 +6,13 @@ const Input = ({ icon: Icon, ...props }) => {
 			</div>
 			<input
 				{...props}
+				maxLength={
+					props.type === 'password'
+						? 15
+						: props.type === 'email'
+							? 50
+							: 100
+				}
 				className='w-full pl-10 pr-3 py-2 bg-gray-800 bg-opacity-50 rounded-lg border border-gray-700 focus:border-green-500 focus:ring-2 focus:ring-green-500 text-white placeholder-gray-400 transition duration-200'
 			/>
 		</div>
